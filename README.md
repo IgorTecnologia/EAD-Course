@@ -43,6 +43,9 @@ Download these files and import them into your Postman to use the ready-made HTT
 
 [Download Enviroment Variables](https://github.com/IgorTecnologia/EAD-Authuser/blob/docs-postman/Local-host-environment.json)
 
+## API Endpoints
+The API provides the following endpoints:
+
 **POST courses**
 ```markdown
 POST /courses - Register Course.
