@@ -248,4 +248,4 @@ Contribuições são bem-vindas! Se você encontrar algum problema ou tiver suge
 
 Ao contribuir para este projeto, siga o estilo de código existente, [convenções de commit](https://medium.com/linkapi-solutions/conventional-commits-pattern-3778d1a1e657), e envie suas alterações em uma branch separada.
 
-![Spring](https://hermes.dio.me/articles/cover/79a1dddc-5f58-46db-bd5f-95733ba66097.png)
+![Spring](https://www.alvantia.com/wp-content/uploads/2018/05/imagen-spring-boot-ENGLISH.jpg)
