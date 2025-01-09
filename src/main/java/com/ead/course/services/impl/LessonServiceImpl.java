@@ -89,7 +89,7 @@ public class LessonServiceImpl implements LessonService {
 
         Optional<Lesson> obj = repository.findById(id);
         Lesson entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + id));
-        copyDtoToEntity(entity, dto, false);
+        copyDtoToEntity(entity, dto, true);
         entity.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         repository.save(entity);
 
@@ -163,7 +163,7 @@ public class LessonServiceImpl implements LessonService {
             }
         }
 
-        if (associateModule && dto.getModule() != null) {
+        if (associateModule && dto.getModule() != null && dto.getModule().getId() != null) {
             Optional<Module> obj = moduleRepository.findById(dto.getModule().getId());
             Module module = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + dto.getModule().getId()));
             entity.setModule(module);
