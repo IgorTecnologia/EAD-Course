@@ -21,7 +21,7 @@ public class ModuleDTO {
         public static interface updatePut {}
     }
 
-    @JsonView({CourseDTO.CourseView.registrationPost.class, CourseDTO.CourseView.coursePut.class, LessonDTO.LessonView.registrationPost.class, LessonDTO.LessonView.modulePut.class})
+    @JsonView({CourseDTO.CourseView.registrationPost.class, CourseDTO.CourseView.coursePut.class, LessonDTO.LessonView.registrationPost.class, LessonDTO.LessonView.modulePut.class, LessonDTO.LessonView.lessonPut.class})
     private UUID id;
 
     @JsonView({CourseDTO.CourseView.registrationPost.class, CourseDTO.CourseView.coursePut.class, ModuleView.registrationPost.class, ModuleView.updatePut.class, LessonDTO.LessonView.modulePut.class})
