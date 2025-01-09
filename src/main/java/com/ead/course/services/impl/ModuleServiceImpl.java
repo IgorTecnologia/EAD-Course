@@ -76,7 +76,7 @@ public class ModuleServiceImpl implements ModuleService {
                 (dto.getLessons() != null ? dto.getLessons() : "Lessons no provided"));
 
         Module entity =  new Module();
-        copyDtoToEntity(entity, dto);
+        copyDtoToEntity(entity, dto, true, true);
         entity.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         entity.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         repository.save(entity);
@@ -100,7 +100,7 @@ public class ModuleServiceImpl implements ModuleService {
 
         Optional<Module> obj = repository.findById(id);
         Module entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + id));
-        copyDtoToEntity(entity, dto);
+        copyDtoToEntity(entity, dto, true, true);
         entity.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         repository.save(entity);
 
@@ -135,17 +135,22 @@ public class ModuleServiceImpl implements ModuleService {
         log.info("Module deleted successfully Id: {}", id);
     }
 
-    void copyDtoToEntity(Module entity, ModuleDTO dto){
+    void copyDtoToEntity(Module entity, ModuleDTO dto, boolean associateById, boolean createNewAssociations){
 
-        entity.setTitle(dto.getTitle());
-        entity.setDescription(dto.getDescription());
+        if(dto.getTitle() != null){
+            entity.setTitle(dto.getTitle());
+        }
 
-        if(dto.getCourse().getId() != null){
+        if(dto.getDescription() != null){
+            entity.setDescription(dto.getDescription());
+        }
+
+        if(associateById && dto.getCourse() != null && dto.getCourse().getId() != null){
             Optional<Course> obj = courseRepository.findById(dto.getCourse().getId());
             Course course = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + dto.getCourse().getId()));
             entity.setCourse(course);
             course.getModules().add(entity);
-        }else{
+        }else if(createNewAssociations && dto.getCourse() != null){
             Course newCourse = new Course();
             newCourse.setName(dto.getCourse().getName());
             newCourse.setDescription(dto.getCourse().getDescription());
@@ -163,12 +168,12 @@ public class ModuleServiceImpl implements ModuleService {
 
         if(dto.getLessons() != null && !dto.getLessons().isEmpty()){
             for(LessonDTO lessonDTO : dto.getLessons()){
-                if(lessonDTO.getId() != null){
+                if(associateById && lessonDTO.getId() != null){
                     Optional<Lesson> obj = lessonRepository.findById(lessonDTO.getId());
                     Lesson lesson = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + lessonDTO.getId()));
                     lesson.setModule(entity);
                     entity.getLessons().add(lesson);
-                }else{
+                }else if(createNewAssociations && dto.getLessons() != null){
                     Lesson newLesson = new Lesson();
 
                     newLesson.setTitle(lessonDTO.getTitle());
