@@ -40,7 +40,7 @@ public class LessonDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime lastUpdateDate;
 
-    @JsonView({LessonView.registrationPost.class, LessonView.modulePut.class})
+    @JsonView({LessonView.registrationPost.class, LessonView.modulePut.class, LessonView.lessonPut.class})
     private ModuleDTO module;
 
     public LessonDTO(){
