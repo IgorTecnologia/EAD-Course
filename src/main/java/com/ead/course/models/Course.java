@@ -71,7 +71,7 @@ public class Course implements Serializable {
     }
 
     public Course(UUID id, String name, String description, String imageUrl, LocalDateTime creationDate, LocalDateTime lastUpdateDate,
-                  Status status, Level level, UUID instructorId) {
+                  Status status, Level courseLevel, UUID instructorId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -79,7 +79,7 @@ public class Course implements Serializable {
         this.creationDate = creationDate;
         this.lastUpdateDate = lastUpdateDate;
         this.status = status;
-        this.courseLevel = level;
+        this.courseLevel = courseLevel;
         this.instructorId = instructorId;
     }
 }
