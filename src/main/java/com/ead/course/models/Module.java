@@ -9,6 +9,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -47,6 +48,7 @@ public class Module implements Serializable {
     @Column(nullable = false)
     private LocalDateTime lastUpdateDate;
 
+    @JoinColumn(name = "course_id")
     @ToString.Exclude
     @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Course course;
@@ -55,4 +57,16 @@ public class Module implements Serializable {
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "module", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Lesson> lessons = new ArrayList<>();
+
+    public Module(){
+    }
+
+    public Module(UUID id, String title, String description, LocalDateTime creationDate, LocalDateTime lastUpdateDate, Course course) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.course = course;
+    }
 }
