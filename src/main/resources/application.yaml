@@ -2,19 +2,13 @@ server:
   port: 8082
 
 Spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/ead-course
-    username: postgres
-    password: admin
+  profiles:
+    active: h2
   jpa:
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-      jdbc:
-        lob.non-contextual-creation: true
-      properties:
-        hibernate:
-          show_sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
   output:
     ansi:
       enabled: Always
