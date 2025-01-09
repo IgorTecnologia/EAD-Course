@@ -151,6 +151,10 @@ public class LessonServiceImpl implements LessonService {
         }
 
         if (dto.getModule() != null) {
+            if (entity.getModule() == null) {
+                entity.setModule(new Module());
+            }
+
             if (dto.getModule().getTitle() != null) {
                 entity.getModule().setTitle(dto.getModule().getTitle());
             }
@@ -159,7 +163,7 @@ public class LessonServiceImpl implements LessonService {
             }
         }
 
-        if (associateModule && dto.getModule().getId() != null) {
+        if (associateModule && dto.getModule() != null) {
             Optional<Module> obj = moduleRepository.findById(dto.getModule().getId());
             Module module = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + dto.getModule().getId()));
             entity.setModule(module);
