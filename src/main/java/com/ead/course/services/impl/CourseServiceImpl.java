@@ -149,7 +149,10 @@ public class CourseServiceImpl implements CourseService {
         }else{
             entity.setName(entity.getName());
         }
-        entity.setDescription(dto.getDescription());
+
+        if(dto.getDescription() != null){
+            entity.setDescription(dto.getDescription());
+        }
 
         if(dto.getImageUrl() != null){
             entity.setImageUrl(dto.getImageUrl());
@@ -157,9 +160,17 @@ public class CourseServiceImpl implements CourseService {
             entity.setImageUrl(entity.getImageUrl());
         }
 
-        entity.setStatus(dto.getStatus());
-        entity.setLevel(dto.getLevel());
-        entity.setInstructorId(dto.getInstructorId());
+        if(dto.getStatus() != null){
+            entity.setStatus(dto.getStatus());
+        }
+
+        if(dto.getCourseLevel() != null){
+            entity.setCourseLevel(dto.getCourseLevel());
+        }
+
+        if(dto.getInstructorId() != null){
+            entity.setInstructorId(dto.getInstructorId());
+        }
 
         entity.getModules().clear();
 
