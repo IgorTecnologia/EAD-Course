@@ -51,7 +51,7 @@ public class CourseDTO {
 
     @JsonView({CourseView.registrationPost.class, CourseView.coursePut.class, ModuleDTO.ModuleView.registrationPost.class, ModuleDTO.ModuleView.updatePut.class})
     @NotNull(message = "The courseLevel field is mandatory.", groups = {CourseView.registrationPost.class, CourseView.coursePut.class})
-    private Level CourseLevel;
+    private Level courseLevel;
 
     @JsonView({CourseView.registrationPost.class, CourseView.coursePut.class, ModuleDTO.ModuleView.registrationPost.class, ModuleDTO.ModuleView.updatePut.class})
     @NotNull(message = "The Instructor ID field cannot be null.", groups = {CourseView.registrationPost.class, CourseView.coursePut.class})
@@ -74,13 +74,13 @@ public class CourseDTO {
     }
 
     public CourseDTO(UUID id, String name, String description, String imageUrl,
-                     Status status, Level level, UUID instructorId, LocalDateTime creationDate, LocalDateTime lastUpdateDate) {
+                     Status status, Level courseLevel, UUID instructorId, LocalDateTime creationDate, LocalDateTime lastUpdateDate) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.status = status;
-        this.CourseLevel = level;
+        this.courseLevel = courseLevel;
         this.instructorId = instructorId;
         this.creationDate = creationDate;
         this.lastUpdateDate = lastUpdateDate;
@@ -93,7 +93,7 @@ public class CourseDTO {
         description = entity.getDescription();
         imageUrl = entity.getImageUrl();
         status = entity.getStatus();
-        CourseLevel = entity.getCourseLevel();
+        courseLevel = entity.getCourseLevel();
         instructorId = entity.getInstructorId();
         creationDate = entity.getCreationDate();
         lastUpdateDate = entity.getLastUpdateDate();
