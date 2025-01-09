@@ -151,7 +151,7 @@ public class ModuleServiceImpl implements ModuleService {
             newCourse.setDescription(dto.getCourse().getDescription());
             newCourse.setImageUrl(dto.getCourse().getImageUrl());
             newCourse.setStatus(dto.getCourse().getStatus());
-            newCourse.setLevel(dto.getCourse().getLevel());
+            newCourse.setCourseLevel(dto.getCourse().getCourseLevel());
             newCourse.setInstructorId(dto.getCourse().getInstructorId());
             newCourse.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
             newCourse.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
