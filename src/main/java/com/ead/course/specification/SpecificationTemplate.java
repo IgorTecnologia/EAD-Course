@@ -1,9 +1,11 @@
 package com.ead.course.specification;
 
 import com.ead.course.models.Course;
+import com.ead.course.models.CourseUser;
 import com.ead.course.models.Lesson;
 import com.ead.course.models.Module;
 import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
@@ -53,4 +55,11 @@ public class SpecificationTemplate {
         };
     }
 
+    public static Specification<Course> courseUserId(final UUID userId){
+        return(root, query, cb) -> {
+            query.distinct(true);
+            Join<Course, CourseUser> courseProd = root.join("courseUsers");
+            return cb.equal(courseProd.get("userId"), userId);
+        };
+    }
 }
