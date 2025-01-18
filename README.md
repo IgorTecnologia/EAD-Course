@@ -32,6 +32,7 @@ git clone https://github.com/IgorTecnologia/EAD-Course.git
 1. Start the application with Maven
 2. The API will be accessible at http://localhost:8082
 3. You must have a PostgreSQL server active on the machine.
+4. Attention!!! To carry out unit and integration tests of the application, the H2 database must be used.
 
 ## Collection Postman
 
@@ -227,6 +228,10 @@ Body: "Course deleted successfully."
 
 ## Database
 This application uses [PostgreSQL](https://www.postgresql.org/docs/) as its database.
+
+There are settings for PostgreSQL e H2 databases, you can use them by changing the application.yaml file.
+
+Attention!!! To carry out unit and integration tests of the application, the H2 database must be used.
 
 ## Technologies Used
 
