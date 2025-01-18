@@ -132,7 +132,7 @@ public class LessonControllerIT {
 
         String jsonBody = mapper.writeValueAsString(dto);
 
-        ResultActions result = mockMvc.perform(put("/lessons/{id}", id)
+        ResultActions result = mockMvc.perform(put("/lessons/modules/lessons/{id}", id)
                 .content(jsonBody)
                     .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
