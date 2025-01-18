@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
@@ -35,9 +36,16 @@ public class CourseController {
 
     @GetMapping
     public ResponseEntity<Page<CourseDTO>> findAllPaged(SpecificationTemplate.CourseSpec spec,
-                                                            @PageableDefault(page = 0, size = 12, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+                                                        @PageableDefault(page = 0, size = 12, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                                        @RequestParam(required = false) UUID userId){
 
-        Page<CourseDTO> page = service.findAllPaged(spec, pageable);
+        Page<CourseDTO> page = null;
+        if(userId != null){
+            page = service.findAllPaged(SpecificationTemplate.courseUserId(userId).and(spec), pageable);
+        }else {
+            page = service.findAllPaged(spec, pageable);
+        }
+
         return ResponseEntity.ok().body(page);
     }
 
